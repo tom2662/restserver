@@ -24,10 +24,14 @@ def lvcalc(request):
     if request.method == 'POST':
         code = request.data.get('code','No Data')
 
-        options = Options()
-        options.add_argument('--headless')
-        options.add_argument('--disable-gpu') 
-        driver = webdriver.Chrome( "C:\\chromedriver.exe", chrome_options=options)
+        # options = Options()
+        # options.add_argument('--headless')
+        # options.add_argument('--disable-gpu') 
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        driver = webdriver.Chrome( '/usr/lib/chromium-browser/chromedriver', options=chrome_options)
         driver.get("https://www.lvcodecalc.com/")
         driver.find_element_by_css_selector("input[type='text']").send_keys(code)
         driver.find_element_by_css_selector("input[type='submit']").click()
