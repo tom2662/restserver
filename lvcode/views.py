@@ -36,6 +36,9 @@ def lvcalc(request):
         driver.find_element_by_css_selector("input[type='text']").send_keys(code)
         driver.find_element_by_css_selector("input[type='submit']").click()
         result = driver.find_element_by_css_selector(".result > div:nth-child(1) > p:nth-child(2)").text
+        #closedriver
+        driver.close()
+        driver.quit()
         return JsonResponse(result, safe=False)
 
     elif request.method == 'GET':
